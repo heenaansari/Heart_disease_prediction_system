@@ -1,0 +1,83 @@
+ {% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Profile</title>
+    <!--Ionic icons CDN-->
+  
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/uprofile.css' %}">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body >
+<header>
+    <div class="containernav">
+        <nav class="nav">
+            <a href="/" class="nav-logo">Smart Life</a>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">Tips</a>
+                </li>
+              
+                
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/profile" class="nav-link">My Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                    <a href="#" class="nav-link">login</a>
+                </li>
+                {% endif %}
+               
+            </ul>
+        
+        </nav>
+    </div>
+</header>
+
+<div class="container p-3 my-3 bg-dark text-white" style="position: relative; top: 60px;">
+    <div class="card-body" >
+        <h2  >Update Profile</h2>
+        <br>
+        <p>*Date in form yyyy-mm-dd</p>
+        <br>
+
+        <p>*Username cannot be  changed</p>
+   
+        <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form|crispy}}
+        <br>
+        <button type="Submit" class="btn btn-primary">Update</button> 
+    </form>
+
+
+  
+    </div>
+    
+   
+</div>
+
+
+</body>
+</html>
+{% endblock %}

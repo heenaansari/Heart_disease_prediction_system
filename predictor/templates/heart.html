@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prediction </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{%static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+<body class="agileits_w3layouts">
+    <h1 class="agile_head text-center">HDPS</h1>
+    
+
+    <div class="w3layouts_main wrap">
+      {{ from.as_p }}
+
+       <hr />
+      {% if context %}
+      <div class="display-4 my-2 text-center">
+        <b style="color: white;">You {{ context }} heart disease.</b>
+      </div>
+      {% endif %}
+
+
+	    <form  method="POST" action="{% url 'heart' %}" class="agile_form">
+        {% csrf_token %}
+
+        <h2>Enter Name :</h2>
+        <input type="text" placeholder="Patient Name" name="name" required="" />
+  
+			 	<h2>Enter Age :</h2>
+			 	<input type="text" placeholder="Your Age" name="age" required="" />
+	
+				<h2>Select your Gender:</h2>
+				<div class="input-group">
+  					<div class="input-group-prepend">
+   						<div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="sex" value="1">
+   							<label for="good" style="color: #ffc107;"> Male</label>
+    					</div>
+              <br/>
+    					<div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="sex" value="0">
+   							<label for="good" style="color: #ffc107;"> Female</label>
+ 					</div>
+  				</div>
+
+
+  				<h2>Chest Pain:</h2>
+				<div class="input-group">
+  					<div class="input-group-prepend">
+   						<div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="cp" value="0">
+   							<label for="good" style="color: #ffc107;"> Typical Agina</label>
+    					</div>
+              <br/>
+    					<div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="cp" value="1">
+   							<label for="good" style="color: #ffc107;"> Atypical agina</label>
+ 					   </div>
+             <br/>
+ 					   <div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="cp" value="2">
+   							<label for="good" style="color: #ffc107;"> Non-aginal pain</label>
+ 					   </div>
+             <br/>
+ 					   <div class="input-group-text">
+   							<input type="radio" aria-label="Radio button for following text input" name="cp" value="3">
+   							<label for="good" style="color: #ffc107;"> Asymptomatic pain</label>
+ 					   </div>
+  				  </div>
+
+            <h2> Trestbps :</h2>
+            <input type="text"  name="trestbps" required="" />
+            
+            <h2> Chol :</h2>
+            <input type="text"  name="chol" required="" />
+
+            <h2>Fasting Blood Sugar :</h2>
+            <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="fbs" value="1">
+                <label for="good" style="color: #ffc107;"> >120mg/dl</label>
+              </div>
+              <br/>
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="fbs" value="0">
+                <label for="good" style="color: #ffc107;"> Normal</label>
+             </div>
+             <br/>
+            </div>
+
+            <h2>Rest ECG:</h2>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="restecg" value="0">
+                <label for="good" style="color: #ffc107;"> Normal</label>
+              </div>
+              <br/>
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="restecg" value="1">
+                <label for="good" style="color: #ffc107;"> Having ST-T wave normality</label>
+             </div>
+             <br/>
+             <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="restecg" value="2">
+                <label for="good" style="color: #ffc107;"> Probable left ventricular</label>
+             </div>
+             </div>
+
+             <h2> Thalach :</h2>
+            <input type="text"  name="thalach" required="" />
+
+            <h2>Exang :</h2>
+            <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="exang" value="1">
+                <label for="good" style="color: #ffc107;"> Yes</label>
+              </div>
+              <br/>
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="exang" value="0">
+                <label for="good" style="color: #ffc107;"> No</label>
+             </div>
+             <br/>
+            </div>
+
+            <h2> Old Peak :</h2>
+            <input type="text"  name="oldpeak" required="" />
+
+            <h2>Slope:</h2>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="slope" value="0">
+                <label for="good" style="color: #ffc107;"> Unsloping</label>
+              </div>
+              <br/>
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="slope" value="1">
+                <label for="good" style="color: #ffc107;"> Flat</label>
+             </div>
+             <br/>
+             <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="slope" value="2">
+                <label for="good" style="color: #ffc107;"> Downsloping</label>
+             </div>
+             </div>
+
+  				
+            <h2> Ca :</h2>
+            <input type="text"  name="ca" required="" />
+
+            <h2>Thal:</h2>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="thal" value="1">
+                <label for="good" style="color: #ffc107;"> Normal</label>
+              </div>
+              <br/>
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="thal" value="2">
+                <label for="good" style="color: #ffc107;"> Fixed Defect</label>
+             </div>
+             <br/>
+             <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" name="thal" value="3">
+                <label for="good" style="color: #ffc107;"> Reversable Defect</label>
+             </div>
+             </div>
+
+				 
+			<br/> <br/>
+			<input type="submit" value="Save" class="agileinfo" />
+	  </form>
+	
+</body>
+</html>

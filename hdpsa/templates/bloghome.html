@@ -1,0 +1,83 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tips</title>
+    <!--Ionic icons CDN-->
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+
+
+
+</head>
+<body>
+<header>
+    <div class="containernav">
+        <nav class="nav">
+            <a href="/" class="nav-logo">Smart Life</a>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/profile" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">Tips</a>
+                </li>
+               
+
+                
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/profile" class="nav-link">My Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                    <a href="/" class="nav-link">Signin</a>
+                </li>
+                {% endif %}
+               
+               
+            </ul>
+        
+        </nav>
+    </div>
+</header>
+
+
+
+<div class="blogbody">
+    {% for blog in blog_list %}
+    <div class="blog-post">
+      <div class="blog-post__img">
+        <img src="{% static 'image/image1.jpg' %}" alt="">
+      </div>
+      <div class="blog-post__info">
+       
+        <h1 class="blog-post__title">{{blog.btitle}}</h1>
+        <div class="blog-post__date">
+          <span>{{blog.bdate}}</span>
+          <span>By {{blog.bauthor}}</span>
+        </div>
+        <p class="blog-post__text">
+          {{blog.bdescription}}
+        </p>
+        <a href="#" class="blog-post__cta"> </a>
+        
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+  </div>
+</body>
+</html>
+{% endblock %}

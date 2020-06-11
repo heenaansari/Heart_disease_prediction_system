@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+	<h2> Documents</h2>
+	<p>
+		<a href="{% url 'upload' %}" class="btn btn-primary btn-lg">Upload File</a>
+	</p>
+
+	<table class="table mb-0">
+		<thead>
+			<tr>
+				<th>Document name</th>
+				<th>Patient Name</th>
+				<th>Doctor Name</th>
+				<th>Download</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for doc in docs %}
+				<tr>
+					<td>{{ doc.docname }}</td>
+					<td>{{ doc.patientname }}</td>
+					<td>{{ doc.doctor }}</td>
+					<td>
+					<a href="{{ doc.pdf.url }}" class="btn btn-primary btn-lg" target="__blank__">
+					Download Pdf</a>
+					
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		
+	</table>
+{% endblock %}

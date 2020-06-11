@@ -1,0 +1,104 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <!--Ionic icons CDN-->
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/indexhome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav-logo">Smart Life</a>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">Tips</a>
+                </li>
+                
+               
+            </ul>
+            
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="circle circle-small">
+        <img src="{% static 'images/circle-small.png' %}" alt="">
+
+    </div>
+    <div class="circle circle-large">
+        <img src="{% static 'images/circle-large.png' %}"  style="height: 1200px; width: 1200px;" alt="">
+    </div>
+
+    <div class="wrap">
+
+        
+        {{ from.as_p }}
+        <h2>Sign Up</h2>
+        <form method="post" action="register/">
+            {% csrf_token %}
+            <input type="text" name="first_name" placeholder="First Name">
+            <input type="text" name="last_name" placeholder="Last Name">
+            <input type="text" name="username" placeholder="Username">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password1"  value="Password">
+            <input type="password" name="password2"  value="Confirm Password">
+            <input type="submit" name="Submit" value="Submit"> 
+
+        </form>
+    
+        
+
+
+
+    </div>
+
+    <div class="overlay">
+        <div class="layer layer-1"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-3"></div>
+    </div>
+</section>
+<!--Gsap CDN    -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.5/gsap.min.js"></script>
+
+<script>
+    gsap.to('.layer-1', {y: '-100vh', delay: .5});
+    gsap.to('.layer-2', {y: '-100vh', delay: .7});
+    gsap.to('.layer-3', {y: '-100vh', delay: .9});
+    gsap.to('.overlay', {y: '-100vh', delay: 1.5});
+
+    gsap.fromTo('.text',
+        {x: '30rem', opacity: 0},
+        {x: 0, opacity: 1, ease: 'back.out(1.7)', delay:1.9});
+
+    gsap.fromTo('.watch-wrapper',
+        {x: '30rem', opacity: 0},
+        {x: 0, opacity: 1, ease: 'back.out(1.7)', delay:2.3});
+
+    gsap.fromTo('.circle-small',
+        {x: '-30rem', opacity: 0},
+        {x: 0, opacity: 1, ease: 'back.out(1.7)', delay:1});
+
+    gsap.fromTo('.circle-large',
+        {x: '30rem', opacity: 0},
+        {x: 0, opacity: 1, ease: 'back.out(1.7)', delay:1.5});
+</script>
+</body>
+</html>
+{% endblock %}

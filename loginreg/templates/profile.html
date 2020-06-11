@@ -1,0 +1,97 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign In</title>
+    <!--Ionic icons CDN-->
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+
+
+</head>
+<body>
+<header>
+    <div class="containernav">
+        <nav class="nav">
+            <a href="/" class="nav-logo">Smart Life</a>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">Tips</a>
+                </li>
+            
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/profile" class="nav-link">My Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                    <a href="#" class="nav-link">login</a>
+                </li>
+                {% endif %}
+               
+            </ul>
+        
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="card">
+        <div class="imgBx" data-text="Profile">
+            <img src="{% static 'images/profile.png' %}" >
+
+        </div>
+        <div class="content">
+            <div>
+                <h3>Profile</h3>
+                <p>Update your profile here</p>
+                <a href="show_userprofile">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="imgBx" data-text="Upload">
+            <img src="{% static 'images/fileupload.png' %}" >
+        </div>
+        <div class="content">
+            <div>
+                <h3>Upload</h3>
+                <p>Upload here</p>
+                <a href="{% url 'upload' %}">Go</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="imgBx" data-text="View File">
+            <img src="{% static 'images/imageupload.png' %}" >
+        </div>
+        <div class="content">
+            <div>
+                <h3>Views Files</h3>
+                <p>View adn download your file her</p>
+                <a href="{% url 'doc' %}">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+{% endblock %}

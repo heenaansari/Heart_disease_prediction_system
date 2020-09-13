@@ -23,7 +23,7 @@ Sklearn Library is used to implement the algorithm.
 - Sanaf Momin
 - Iqraa Shaikh
 
-#Acknowledgments
+# Acknowledgments
 
 - Prof.Apeksha Milind Gopale at Kalsekar Technical Campus for Guidance
 - Template for Homepage was taken from Julio Codes (youtube :https://www.youtube.com/watch?v=rxKAxINuJhI, github : https://github.com/jlop007/jevelin)

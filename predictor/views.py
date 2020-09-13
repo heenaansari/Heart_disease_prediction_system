@@ -19,21 +19,16 @@ def heart(request):
 
     
     
-    """ 
-    Reading the training data set. 
-    """
-    df = pd.read_csv('static/Heart_train.csv')
+   
+    df = pd.read_csv('static/Heart_train.csv') #Reading the training data set.
     data = df.values
     X = data[:, :-1]
     Y = data[:, -1:]
 
-    """ 
-    Reading data from the user. 
-    """
 
     value = ''
 
-    if request.method == 'POST':
+    if request.method == 'POST':    #Storing the data given by user
 
         age = float(request.POST['age'])
         name = request.POST['name']
@@ -49,6 +44,12 @@ def heart(request):
         slope = float(request.POST['slope'])
         ca = float(request.POST['ca'])
         thal = float(request.POST['thal'])
+        
+         #Storing the Data in Array
+        '''
+        reshape: Gives a new shape to an array without changing its data.
+        '''      
+
 
         user_data = np.array(
             (age,
@@ -66,6 +67,16 @@ def heart(request):
              thal)
         ).reshape(1, 13)
 
+        
+         '''
+        Working of Random Forest Classifier :
+        1. Select Random Samples from DataSet
+        2. Construct a decision tree for each sample and get a prediction result from each decision tr
+        3. Perform a vote for each predicted result.
+        4. Select the prediction result with the most votes as the final prediction.
+        for more visit : https://www.datacamp.com/community/tutorials/random-forests-classifier-python
+        '''
+            
         rf = RandomForestClassifier(
             n_estimators=16,
             criterion='entropy',
@@ -74,12 +85,13 @@ def heart(request):
 
         rf.fit(np.nan_to_num(X), Y)
         rf.score(np.nan_to_num(X), Y)
-        predictions = rf.predict(user_data)
+        predictions = rf.predict(user_data)  #passing the data and storing the result
+
 
         if int(predictions[0]) == 1:
-            value = 'have'
+            value = 'HAVE'
         elif int(predictions[0]) == 0:
-            value = "don\'t have"
+            value = "DON\'T "
 
         prediction = Prediction(pname=name, page=age, pgender=sex, pcp=cp, ptrestbps=trestbps, pchol=chol, pfbs=fbs, prestecg=restecg, pthalach=thalach, pexang=exang, poldpeak=oldpeak, pslope=slope, pca=ca, pthal=thal, presult=value
         )

@@ -8,6 +8,14 @@ import csv,io
 from django.contrib.auth.models import User, auth
 
 
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 def heart(request):
 
     dict1 = request.POST
@@ -16,22 +24,17 @@ def heart(request):
         for key, value in dict1.items():
                 wrt.writerow([key,value])
 
- 
-    """ 
-    Reading the training data set. 
-    """
-    df = pd.read_csv('static/Heart_train.csv')
+
+    df = pd.read_csv('static/Heart_train.csv') #Reading the training dataset
     data = df.values
     X = data[:, :-1]
     Y = data[:, -1:]
 
-    """ 
-    Reading data from the user. 
-    """
+ 
 
     value = ''
 
-    if request.method == 'POST':
+    if request.method == 'POST': #Storing the data given by user
 
         age = float(request.POST['age'])
         sex = float(request.POST['sex'])
@@ -47,6 +50,10 @@ def heart(request):
         ca = float(request.POST['ca'])
         thal = float(request.POST['thal'])
 
+        #Storing the Data in Array
+        '''
+        reshape: Gives a new shape to an array without changing its data.
+        '''
         user_data = np.array(
             (age,
              sex,
@@ -63,6 +70,15 @@ def heart(request):
              thal)
         ).reshape(1, 13)
 
+        
+        '''
+        Working of Random Forest Classifier :
+        1. Select Random Samples from DataSet
+        2. Construct a decision tree for each sample and get a prediction result from each decision tr
+        3. Perform a vote for each predicted result.
+        4. Select the prediction result with the most votes as the final prediction.
+        for more visit : https://www.datacamp.com/community/tutorials/random-forests-classifier-python
+        '''
         rf = RandomForestClassifier(
             n_estimators=16,
             criterion='entropy',
@@ -71,22 +87,14 @@ def heart(request):
 
         rf.fit(np.nan_to_num(X), Y)
         rf.score(np.nan_to_num(X), Y)
-        predictions = rf.predict(user_data)
+        predictions = rf.predict(user_data)  #passing the data and storing the result
 
         if int(predictions[0]) == 1:
-            value = 'have'
+            value = 'HAVE'
         elif int(predictions[0]) == 0:
-            value = "don\'t have"
+            value = "DON\'T HAVE"
 
     return render(request,'heart.html',{'context': value})
 
 
 
-
-
-def handler404(request):
-    return render(request, '404.html', status=404)
-
-def logout(request):
-    auth.logout(request)
-    return redirect('/')
